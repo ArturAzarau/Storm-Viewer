@@ -23,6 +23,7 @@ final class ViewPhotoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = pictureToShow
+        
     }
     
     // MARK: -
@@ -39,9 +40,18 @@ final class ViewPhotoVC: UIViewController {
         navigationController?.hidesBarsOnTap = false
     }
     
-    // MARK: - Fro iPhone X
+    // MARK: - For iPhone X
     
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return navigationController!.hidesBarsOnTap
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        let vc = UIActivityViewController(activityItems: [imageView.image], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
